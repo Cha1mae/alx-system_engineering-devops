@@ -1,0 +1,17 @@
+#!/bin/bash
+# This script is displaying gl bl
+
+line=1
+while [ $line -le 10 ]
+do
+    if [ $line -eq 4 ]
+    then
+        echo "bad luck"
+    elif [ $line -eq 8 ]
+    then
+        echo "good luck"
+    else
+        echo "Best School"
+    fi
+    line=$(( line + 1 ))
+done

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Lists all the runnin processes in the system
+
+ps -ef --forest

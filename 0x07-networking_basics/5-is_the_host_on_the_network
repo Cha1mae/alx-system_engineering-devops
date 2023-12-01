@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script pings an IP adress
 
 if [ "$#" -ne 1 ]; then

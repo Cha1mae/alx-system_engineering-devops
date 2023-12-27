@@ -1,6 +1,6 @@
 
 # Simple Web Stack :
-![Alt text](0-simple_web_stack.drawio.png)
+![Alt text](0-simple_web_stack.png)
 # Description :
 This is a simple web infrastructure that hosts a website that can be reached through www.foobar.com. There are no firewalls or SSL certificates to protect the server's network. The resources (CPU, RAM, and SSD) provided by the server must be shared by each component (database, application server).
 # Specifics About This Infrastructure :

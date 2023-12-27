@@ -1,5 +1,5 @@
 # Distributed Web Infrastructure:
-![Alt text](images/1-distributed_web_infrastructure.png)
+![Alt text](images/1-distributed_web_infrastructure.png?v=2)
 
 link to board: https://miro.com/app/board/uXjVN-tzvvg=/?share_link_id=560637546258
 

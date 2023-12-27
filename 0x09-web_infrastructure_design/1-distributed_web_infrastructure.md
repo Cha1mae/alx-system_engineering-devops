@@ -1,5 +1,5 @@
 # Distributed Web Infrastructure:
-![Alt text](file:///c:\Users\chaima\Desktop\1-distributed_web_infrastructure.png)
+![Alt text](C:\Users\chaima\Desktop\1-distributed_web_infrastructure.png)
 
 link to board: https://miro.com/app/board/uXjVN-tzvvg=/?share_link_id=560637546258
 

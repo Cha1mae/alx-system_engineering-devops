@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-# Simple Web Stack
 
-=======
 # Simple Web Stack :
 ![Alt text](0-simple_web_stack.drawio.png)
 # Description :
@@ -29,4 +26,3 @@ To maintain a collection of organized information that is easy to access, easy t
 
 * What the server uses to communicate with the client (the computer of the user requesting the website).
 The communication between the client and the server takes place over the Internet network using the TCP/IP suite of protocols.
->>>>>>> 140a08688960388933c6bdb04fc22c1dae8b33cc

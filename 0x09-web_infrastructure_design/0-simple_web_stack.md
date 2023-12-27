@@ -26,3 +26,12 @@ To maintain a collection of organized information that is easy to access, easy t
 
 * What the server uses to communicate with the client (the computer of the user requesting the website).
 The communication between the client and the server takes place over the Internet network using the TCP/IP suite of protocols.
+
+# Issues With This Infrastructure : 
+
+* This infrastructure has several SPOFs (single point failures) :
+	If the MySQL database server fails.
+* Downtime when maintenance is necessary : 
+	We have to shut down a component or the server when we need to perform some maintenance checks. The site would go down because there's only one server.
+* If there is too much incoming traffic, it can't be scaled :
+	Because one server contains the necessary components, it would be difficult to scale this infrastructure. If the server receives a lot of requests, it may quickly run out of resources or slow down.

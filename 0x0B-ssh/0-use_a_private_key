@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # this will connect to the server using a private
 # hopefuly the ip is correct
-
 ssh -i ~/.ssh/school ubuntu@52.91.152.110

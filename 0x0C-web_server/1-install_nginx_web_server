@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# this is to install NGINX server !
+
+# Update package list
+sudo apt-get update
+# Install NGINX
+sudo apt-get install -y nginx
+# hi world
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+# restart the server
+sudo service nginx restart

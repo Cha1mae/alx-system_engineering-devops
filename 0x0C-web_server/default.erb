@@ -1,0 +1,16 @@
+# /etc/nginx/sites-available/default
+# this will set up a basic Nginx server
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

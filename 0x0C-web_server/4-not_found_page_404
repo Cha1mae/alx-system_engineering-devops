@@ -8,7 +8,7 @@ sudo ufw allow 'Nginx HTTP'
 
 # Creating a simple HTML page
 sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
-sudo sh -c '"Ceci n'est pas une page" > /var/www/html/404.html
+sudo sh -c 'echo "Ceci n'est pas une page" > /var/www/html/404.html
 
 # Adding redirection
 sed -i '42i\\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n' /etc/nginx/sites-available/default

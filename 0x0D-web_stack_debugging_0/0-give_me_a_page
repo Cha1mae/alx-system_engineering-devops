@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Apache may not be running or may be misconfigured on the Docker container
+# This script starts the Apache service to address this issue
+
+service apache2 start

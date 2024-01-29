@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
-# configures a new Ubuntu machine
-# a custom HTTP response header and a redirection,
-# I used my previous script used for the past project
-# Ignoring SC2154 for shellcheck
+# custom HTTP response header and a redirection
 
-# Updating packages and installing necessary dependencies
+# Updating nd installing necessary stuff
 apt-get update
 apt-get -y install nginx apt-transport-https ufw
 
-# Enabling Nginx in UFW
+# Enabling Nginx
 ufw allow 'Nginx HTTP'
 
-# Getting the hostname of the server
+# Geting the hostname of the server
 HOST_NAME=$(hostname)
 
-# Adding custom response header to know the server name for debugging
+# Adding custom response header to Nginx configuration
 HEADER="\\\n\tadd_header X-Served-By \"$HOST_NAME\";\n"
 FIND=$(grep "X-Served-By" /etc/nginx/sites-available/default)
 if [[ -z $FIND ]]; then
@@ -24,14 +21,14 @@ fi
 # Creating a first index.html page
 echo "Hello World!" > /var/www/html/index.html
 
-# Adding to the nginx configuration file a redirection to another page
+# Adding redirection to another page
 FIND=$(grep "location /redirect_me" /etc/nginx/sites-available/default)
 STRING="\\\n\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=3MbaGJN2ioQ;\n\t}\n"
 if [[ -z $FIND ]]; then
     sed -i "/listen \[::\]:80 default_server;/a $STRING" /etc/nginx/sites-available/default
 fi
 
-# Adding to the nginx configuration file an error page 404
+# Adding an error page 404
 FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
 ERROR="\\\n\terror_page 404 /custom_404.html;\n"
 if [[ -z $FIND ]]; then
@@ -39,6 +36,6 @@ if [[ -z $FIND ]]; then
     sed -i "40i $ERROR" /etc/nginx/sites-available/default
 fi
 
-# Checking Nginx configuration syntax before restarting
+# Checking Nginx before restarting
 nginx -t
 service nginx restart

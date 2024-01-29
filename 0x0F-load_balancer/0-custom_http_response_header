@@ -16,14 +16,14 @@ sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
 sudo sh -c 'echo "Ceci n'\''est pas une page" > /var/www/html/404.html'
 
 # Get the hostname of the server
-HOSTNAME=$(hostname)
+HOSTNAME=$(462500-web-01)
 
 # Configure Nginx
 sudo tee /etc/nginx/sites-available/default << EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    add_header X-Served-By "\$HOSTNAME";
+    add_header X-Served-By "$HOSTNAME";
     location / {
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;

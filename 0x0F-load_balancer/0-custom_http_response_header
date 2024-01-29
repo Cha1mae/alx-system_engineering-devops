@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# configures a new Ubuntu machine
-# a custom HTTP response header and a redirection,
-# I used my previous script used for the past project
+# Configures a new Ubuntu machine with custom HTTP response header and redirection
+# Using the previous script with additional custom header configuration
 # Ignoring SC2154 for shellcheck
 
 # Updating packages and installing necessary dependencies
@@ -18,7 +17,7 @@ HOST_NAME=$(hostname)
 HEADER="\\\n\tadd_header X-Served-By \"$HOST_NAME\";\n"
 FIND=$(grep "X-Served-By" /etc/nginx/sites-available/default)
 if [[ -z $FIND ]]; then
-    sed -i "23i $HEADER" /etc/nginx/sites-available/default
+    sed -i "/server_name _;/a $HEADER" /etc/nginx/sites-available/default
 fi
 
 # Creating a first index.html page
@@ -36,7 +35,7 @@ FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
 ERROR="\\\n\terror_page 404 /custom_404.html;\n"
 if [[ -z $FIND ]]; then
     echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-    sed -i "40i $ERROR" /etc/nginx/sites-available/default
+    sed -i "/return 301 https:\/\/www.youtube.com\/watch?v=3MbaGJN2ioQ;/a $ERROR" /etc/nginx/sites-available/default
 fi
 
 # Checking Nginx configuration syntax before restarting

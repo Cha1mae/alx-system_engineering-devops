@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# no need to download Nginx since i already have it
+
+service nginx restart

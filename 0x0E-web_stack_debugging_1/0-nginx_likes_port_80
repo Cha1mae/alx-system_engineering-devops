@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-# no need to download Nginx since i already have it
+# no need to download Nginx since I already have it
+# well, I just connected it to port 80 and restarted Nginx
 
+service nginx start
+sed -i '/listen 80;/a listen 80 default_server;' /etc/nginx/sites-available/default
 service nginx restart

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # my god please make this work
 
-sudo apt-get install -y nginx && service nginx start
+apt-get install -y nginx
+if service nginx status | grep -q "not running"; then service nginx start; fi

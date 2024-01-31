@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# no need to download Nginx since I already have it
 # well, I just connected it to port 80 and restarted Nginx
 
 service nginx start

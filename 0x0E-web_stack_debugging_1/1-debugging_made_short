@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 # my god please make this work
 
-sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
-sudo service nginx restart
-service nginx status | grep -q "not running" && echo " * nginx is not running"
+sudo apt-get install -y nginx && service nginx start

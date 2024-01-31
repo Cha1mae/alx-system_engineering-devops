@@ -1,6 +1,26 @@
 #!/usr/bin/env bash
 # well, I just connected it to port 80 and restarted Nginx
 
-service nginx start
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-service nginx restart
+# ensuring nginx is here
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# starting the nginx
+sudo service nginx start
+
+# changing the port from 8080 to 80
+# in the default confuguration
+sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+
+# restarting the service to apply changes
+sudo service nginx restart
+
+# allowing nginx firewall
+sudo ufw allow 'Nginx Full'
+
+# checking if this works
+if sudo netstat -plntu | grep :80 | grep nginx; then
+    echo "Nginx is running and listening on port 80"
+else
+    echo "Nginx is not running or not listening on port 80"
+fi

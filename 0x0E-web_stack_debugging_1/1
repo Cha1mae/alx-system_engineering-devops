@@ -1,4 +1,26 @@
+Hit:1 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:2 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 https://download.docker.com/linux/ubuntu focal InRelease
+Get:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Ign:6 http://ppa.launchpad.net/vbernat/haproxy-1.8/ubuntu focal InRelease
+Hit:7 http://ppa.launchpad.net/vbernat/haproxy-2.4/ubuntu focal InRelease
+Err:8 http://ppa.launchpad.net/vbernat/haproxy-1.8/ubuntu focal Release
+  404  Not Found [IP: 185.125.190.80 80]
+Hit:9 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists...
+E: The method driver /usr/lib/apt/methods/[https could not be found.
+E: The repository 'http://ppa.launchpad.net/vbernat/haproxy-1.8/ubuntu focal Release' does not have a Release file.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+nginx is already the newest version (1.18.0-0ubuntu1.4).
+0 upgraded, 0 newly installed, 0 to remove and 128 not upgraded.
  * Starting nginx nginx
    ...done.
  * Restarting nginx nginx
    ...done.
+sudo: ufw: command not found
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      28512/nginx: master 
+tcp6       0      0 :::80                   :::*                    LISTEN      28512/nginx: master 
+Nginx is running and listening on port 80

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # my god please make this work
-
-sudo sed -i 's/8080/80/' /etc/nginx/sites-enabled/default
+sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
 sudo service nginx restart
-sudo dd status=none of=/run/nginx.pid
+echo "" | sudo dd status=none of=/run/nginx.pid

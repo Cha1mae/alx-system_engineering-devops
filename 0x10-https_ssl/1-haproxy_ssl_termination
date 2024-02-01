@@ -33,19 +33,19 @@ defaults
     errorfile 503 /etc/haproxy/errors/503.http
     errorfile 504 /etc/haproxy/errors/504.http
 
-frontend www-cha1mae-frontend
+frontend cha1mae-frontend
     bind *:80
     mode http
     http-request redirect scheme https code 301 unless { ssl_fc }
     http-request set-header X-Forwarded-Proto http
-    default_backend www-cha1mae-backend
+    default_backend cha1mae-backend
 
-frontend www-cha1mae-frontend-https
-    bind *:443 ssl crt /etc/haproxy/certs/cha1mae.tech.pem
+frontend cha1mae-frontend-https
+    bind *:443 ssl crt /etc/haproxy/certs/www.cha1mae.tech.pem
     http-request set-header X-Forwarded-Proto https
-    default_backend www-cha1mae-backend
+    default_backend cha1mae-backend
 
-backend www-cha1mae-backend
+backend cha1mae-backend
     balance roundrobin
     server 462500-web-01 52.91.152.110:80 check
     server 462500-web-02 52.87.152.252:80 check

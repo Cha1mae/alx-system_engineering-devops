@@ -1,1 +1,71 @@
-https://www.linkedin.com/pulse/what-happens-when-you-type-googlecom-your-browser-press-chaima-s--gjuje/
+1- Introduction:
+Have you ever stopped to consider the miracle of modern Web browsing? With just a few keystrokes, you can access a wealth of information, entertainment, and services from around the world. But behind this seemingly effortless experience lies a complex network of technologies working tirelessly to fulfill your request.
+
+In this age of digital connectivity, understanding what happens behind the scenes when you type "https://www.google.com" into your browser is not just an academic exercise, but a gateway to understanding the intricate infrastructure that underpins the Internet. From the moment your fingertips grace the keyboard to the moment the requested web page materializes on your screen, a symphony of protocols, servers, and security measures orchestrate the flow of data across the vast expanse of cyberspace.
+
+Join us on a journey through the layers of the web stack as we unravel the mysteries of web browsing. By peeling back the layers of abstraction, we gain a deeper understanding of the intricacies of modern web technology and the collaborative effort required to deliver seamless user experiences in an interconnected world. So, let's embark on this voyage of discovery and shed light on the hidden mechanisms that make the Internet come alive.
+
+2- User Input:
+When a user types "https://www.google.com" into their browser's address bar and hits enter, the browser initiates the process of sending a request to retrieve the web page associated with that URL.
+
+3- DNS resolution:
+The browser must first resolve the domain name "www.google.com" to its corresponding IP address. It sends a DNS (Domain Name System) request to the user's local DNS resolver, which is typically provided by the Internet Service Provider (ISP) or configured by the network administrator.
+
+4- DNS request:
+The local DNS resolver may have cached the IP address for "www.google.com" from previous requests. If not, it forwards the request to the authoritative DNS servers for the ".com" top-level domain, which in turn direct the resolver to the DNS servers authoritative for "google.com".
+
+5- IP address Retrieval:
+The authoritative DNS servers for "google.com" respond with the IP address associated with "www.google.com", allowing the resolver to complete the DNS resolution process.
+
+6- TCP/IP connection:
+Armed with the IP address, the browser establishes a TCP/IP connection to the web server hosting "www.google.com" and initiates a three-way handshake to confirm readiness to communicate.
+
+7- Firewall:
+A firewall is a network security device or software program designed to monitor and control incoming and outgoing network traffic based on predetermined security rules. It acts as a barrier between a trusted internal network, such as a company's private network, and untrusted external networks, such as the Internet.
+
+Firewalls examine data packets as they pass through and determine whether to allow or block them based on various criteria, including source and destination IP addresses, port numbers, and protocol types. They can operate at the network level (packet filtering), the application level (proxy filtering), or both.
+
+The primary functions of a firewall include :
+
+Access control: Firewalls enforce access policies to prevent unauthorized access to or from the network. They determine which traffic is allowed to pass based on predefined rules.
+
+Packet filtering: Firewalls inspect individual data packets as they travel between networks, allowing or blocking them based on specific criteria set by the network administrator.
+
+Stateful inspection: Some advanced firewalls perform stateful inspection, keeping track of the state of active connections and passing only legitimate packets that belong to established sessions.
+
+Network Address Translation (NAT): Firewalls often include NAT functionality, which translates private IP addresses within the internal network into a single public IP address when communicating with external networks. This helps hide the internal network structure and conserves public IP addresses.
+
+Logging and reporting: Firewalls log information about network traffic, including allowed and blocked connections, which can be useful for monitoring and troubleshooting network security issues.
+
+Overall, firewalls are essential components of the network security infrastructure, providing a critical layer of defense against unauthorized access, malicious attacks, and other security threats. They play a critical role in protecting sensitive data and maintaining the integrity and confidentiality of network resources.
+
+8- HTTP Request:
+Once the TCP connection is established, the browser sends an HTTP (or HTTPS) request to the web server for the specific resource located at "https://www.google.com," typically an HTML file such as index.html.
+
+9- Server response:
+The Web server receives the HTTP request, processes it, and may dynamically generate the requested Web page or retrieve an existing HTML file from storage.
+
+10- HTTPS/SSL handshake:
+Given the "https://" prefix, which indicates a secure connection, the browser and server engage in an SSL handshake, which facilitates the establishment of a secure HTTPS connection by exchanging cryptographic keys and authenticating the server's SSL certificate.
+	
+11- Secure data transmission:
+After the SSL handshake is successfully completed, data is transferred between the browser and server over an encrypted SSL/TLS connection, protecting sensitive information from potential eavesdroppers.
+
+12- Web page rendering:
+The browser receives the web page's HTML, CSS, JavaScript, and other resources from the server, parses and interprets them, and renders the web page according to the specified layout, styling, and functionality.
+
+13- Load-balancer:
+Load balancing is a crucial aspect of managing web traffic efficiently. Load balancers distribute incoming network traffic across multiple servers to ensure optimal resource utilization, maximize throughput, and minimize response time. By evenly distributing requests among server resources, load balancers enhance scalability and reliability, preventing any single server from becoming overwhelmed.
+
+14- Web server:
+Web servers play a central role in the process of handling HTTP requests and serving web pages to clients. When a user initiates a request by typing "https://www.google.com" into their browser, a web server receives the HTTP request and processes it. It may dynamically generate the requested web page or retrieve an existing HTML file from storage, preparing it for transmission back to the client's browser.
+
+15- Application server:
+Application servers are responsible for executing the application logic of web applications. They generate dynamic content for web pages, process user requests, and interact with databases to fetch relevant information. In the context of "https://www.google.com," an application server may be responsible for executing complex search algorithms or handling user authentication processes before generating the final web page.
+
+16- Database:
+Databases serve as the backbone for storing and retrieving data in web applications. In the case of "https://www.google.com," the application server interacts with a database to fetch relevant search results, user preferences, or other personalized content to be displayed on the webpage. Databases ensure data integrity, consistency, and reliability, playing a critical role in the functionality of web applications.
+
+17- Conclusion:
+By the time the fully rendered web page appears in the user's browser, a complex symphony of interactions involving DNS resolution, TCP/IP communication, HTTPS encryption, server processing, load balancing, application logic execution, and database interaction has unfolded. Understanding this intricate process provides invaluable insight into the mechanics of web browsing and the underlying infrastructure of the Internet.
+

@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 # runnin ngnx as ngnx
-
 # Stop Apache if it's running
 service apache2 stop
-
 # Modify nginx.conf to run nginx as nginx user
 sed -i 's/#user www-data;/user nginx;/g' /etc/nginx/nginx.conf
-
 # Modify the default Nginx site configuration to listen on port 8080
 sed -i 's/80/8080/g' /etc/nginx/sites-available/default
-
 # Restart Nginx service
 service nginx restart

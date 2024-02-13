@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# runnin ngnx as ngnx
-# Stop Apache if it's running
-service apache2 stop
-# Modify nginx.conf to run nginx as nginx user
-sed -i 's/#user www-data;/user nginx;/g' /etc/nginx/nginx.conf
-# Modify the default Nginx site configuration to listen on port 8080
+# runnin ngnx as nginx
+# kiww any running instances of Apache web server
+pkill apache2
+# Modify the nginx configuration file to listen on port 8080 instead of 80
 sed -i 's/80/8080/g' /etc/nginx/sites-available/default
-# Restart Nginx service
-service nginx restart
+# Change the permissions of the nginx configuration file to read-only for all
+chmod 644 /etc/nginx/nginx.conf
+# Restart the nginx service to apply the changes
+sudo -u nginx service nginx restart

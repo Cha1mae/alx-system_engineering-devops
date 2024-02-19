@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""This will help us gather data from
-an API and export to CSV"""
+"""This will help us gather data from an API and export to CSV"""
 
 import csv
 import requests
@@ -13,24 +12,27 @@ if __name__ == "__main__":
 
     user_id = int(sys.argv[1])
 
-    user_response = requests.get(
-        f'https://jsonplaceholder.typicode.com/users/{user_id}')
-    if user_response.status_code != 200:
+    users_response = requests.get('https://jsonplaceholder.typicode.com/users')
+    users = users_response.json()
+
+    for user in users:
+        if user['id'] == user_id:
+            username = user['username']
+            break
+    else:
         print("Error: User ID not found")
         sys.exit(1)
 
-    user = user_response.json()
-
-    todos_response = requests.get(
-        f'https://jsonplaceholder.typicode.com/users/{user_id}/todos')
-    if todos_response.status_code != 200:
-        print("Error: Unable to fetch TODOs")
-        sys.exit(1)
-
+    todos_response = requests.get('https://jsonplaceholder.typicode.com/todos')
     todos = todos_response.json()
 
     with open(f'{user_id}.csv', 'w', newline='') as csvfile:
         taskwriter = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         for task in todos:
-            taskwriter.writerow([user_id, user.get('name'),
-                                 task.get('completed'), task.get('title')])
+            if task['userId'] == user_id:
+                taskwriter.writerow([
+                    user_id,
+                    username,
+                    task.get('completed'),
+                    task.get('title')
+                ])

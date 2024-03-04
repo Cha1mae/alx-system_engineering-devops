@@ -2,42 +2,39 @@
 # Configures a new Ubuntu machine with custom HTTP response header and redirection
 # Using the previous script with additional custom header configuration
 # Ignoring SC2154 for shellcheck
-
-# Updating packages and installing necessary dependencies
-apt-get update
-apt-get -y install nginx apt-transport-https ufw
-
-# Enabling Nginx in UFW
+apt-get update -y
+apt-get install nginx -y
 ufw allow 'Nginx HTTP'
 
-# Getting the hostname of the server
-HOST_NAME=$(hostname)
-
-# Adding custom response header to know the server name for debugging
-HEADER="\\\n\tadd_header X-Served-By \"$HOST_NAME\";\n"
-FIND=$(grep "X-Served-By" /etc/nginx/sites-available/default)
-if [[ -z $FIND ]]; then
-    sed -i "/server_name _;/a $HEADER" /etc/nginx/sites-available/default
-fi
-
-# Creating a first index.html page
 echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+hostname="$(hostname)"
+echo "
+server {
+        listen 80;
+        listen [::]:80;
 
-# Adding to the nginx configuration file a redirection to another page
-FIND=$(grep "location /redirect_me" /etc/nginx/sites-available/default)
-STRING="\\\n\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=3MbaGJN2ioQ;\n\t}\n"
-if [[ -z $FIND ]]; then
-    sed -i "/listen \[::\]:80 default_server;/a $STRING" /etc/nginx/sites-available/default
-fi
+        server_name _;
 
-# Adding to the nginx configuration file an error page 404
-FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
-ERROR="\\\n\terror_page 404 /custom_404.html;\n"
-if [[ -z $FIND ]]; then
-    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-    sed -i "/return 301 https:\/\/www.youtube.com\/watch?v=3MbaGJN2ioQ;/a $ERROR" /etc/nginx/sites-available/default
-fi
+        error_page 404 /404.html;
+        add_header X-Served-By $hostname;
 
-# Checking Nginx configuration syntax before restarting
-nginx -t
+        location / 
+	{
+            root /var/www/html;
+            index index.html;
+        }
+
+        location /redirect_me 
+	{
+            return 301 https://www.github.com/Cha1mae;
+        }
+
+        location /404 
+	{
+            root /var/www/html;
+            internal;
+        }
+}
+" >/etc/nginx/sites-available/default
 service nginx restart

@@ -36,8 +36,8 @@ frontend www
     default_backend servers
 backend servers
     balance roundrobin
-    server 462500-web-01 54.236.43.6:80 check
-    server 462500-web-02 52.87.152.252:80 check
+    server web-01 54.236.43.6:80 check
+    server web-02 52.87.152.252:80 check
 " >$config
 }
 

@@ -1,15 +1,59 @@
 #!/usr/bin/env bash
 #Installing and configuring HAproxy on the lb-01 server.
+install_haproxy() {
+    apt update
+    apt-get install -y haproxy
+}
 
-# Installing HAProxy and configure for two servers
-apt-get update
-apt-get -y install haproxy=1.8.*
+configure_haproxy() {
+    config="/etc/haproxy/haproxy.cfg"
+    echo "global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+frontend www
+    bind *:80
+    default_backend servers
+backend servers
+    balance roundrobin
+    server 462500-web-01 54.236.43.6:80 check
+    server 462500-web-02 52.87.152.252:80 check
+" >$config
+}
 
-# Enabling HAProxy in init script
-echo "ENABLED=1" >> /etc/default/haproxy
+enable_haproxy_init() {
+    if ! grep -q '^ENABLED=' /etc/default/haproxy; then
+        echo 'ENABLED=1' >>/etc/default/haproxy
+    else
+        sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
+    fi
+}
 
-# ip adresses
-sed -i '/504.http/a \\nlisten http-in\n\tbind *:80\n\tmode http\n\tbalance roundrobin\n\tserver 462500-web-01 52.91.152.110:80 check\n\tserver 462500-web-02 52.87.152.252:80 check' /etc/haproxy/haproxy.cfg
+restart_haproxy() {
+    service haproxy restart
+}
 
-# Restarting
-systemctl restart haproxy
+install_haproxy
+configure_haproxy
+enable_haproxy_init
+restart_haproxy

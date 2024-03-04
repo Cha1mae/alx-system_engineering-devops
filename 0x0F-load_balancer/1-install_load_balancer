@@ -1,54 +1,59 @@
 #!/usr/bin/env bash
 #Installing and configuring HAproxy on the lb-01 server.
-echo -e "Updating and doing some minor checks...\n"
+install_haproxy() {
+    apt update
+    apt-get install -y haproxy
+}
 
-function install() {
-    command -v "$1" &> /dev/null
+configure_haproxy() {
+    config="/etc/haproxy/haproxy.cfg"
+    echo "global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+frontend www
+    bind *:80
+    default_backend servers
+backend servers
+    balance roundrobin
+    server 462500-web-01 54.236.43.6:80 check
+    server 462500-web-02 52.87.152.252:80 check
+" >$config
+}
 
-    if [ $? -ne 0 ]; then
-        echo -e "Installing: $1\n"
-        sudo apt-get update -y -qq && \
-        sudo apt-get install -y "$1" -qq
-        echo -e "\n"
+enable_haproxy_init() {
+    if ! grep -q '^ENABLED=' /etc/default/haproxy; then
+        echo 'ENABLED=1' >>/etc/default/haproxy
     else
-        echo -e "${1} is already installed.\n"
+        sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
     fi
 }
 
-install haproxy # Install haproxy
+restart_haproxy() {
+    service haproxy restart
+}
 
-echo -e "\nSetting up some minor stuff.\n"
-
-# Backup default server config file
-sudo cp /etc/haproxy/haproxy.cfg haproxy_default.backup
-
-server_config="
-defaults
-  mode http
-  timeout client 15s
-  timeout connect 10s
-  timeout server 15s
-  timeout http-request 10s
-
-frontend clickviral-tech-frontend
-    bind *:80
-    default_backend clickviral-tech-backend
-
-backend clickviral-tech-backend
-    balance roundrobin
-    server web-01 54.236.43.6:80 check
-    server web-02 52.87.152.252:80 check
-"
-
-echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
-
-# Enable HAProxy to be started by init script
-echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
-
-echo "configured - Roundrobin On web-01 & web-02"
-
-if [ "$(pgrep -c haproxy)" -le 0 ]; then
-    sudo service haproxy start
-else
-    sudo service haproxy restart
-fi
+install_haproxy
+configure_haproxy
+enable_haproxy_init
+restart_haproxy

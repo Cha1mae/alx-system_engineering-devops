@@ -1,16 +1,22 @@
 #!/usr/bin/python3
-"""This returns the number of subscribers for a given subreddit"""
+"""
+This module contains a function that queries the Reddit API
+"""
 import requests
-import sys
 
 def number_of_subscribers(subreddit):
-    """
-    Constructing URL for subreddit's about page
-    Sending GET request to retrieve subreddit info
-    """
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'custom'}
-    response = requests.get(url, headers=headers, allow_redirects=False)
-    if response.status_code != 200:
+    """ Returns the number of subscribers for a given subreddit. """
+    u_agent = 'Mozilla/5.0'
+
+    headers = {
+        'User-Agent': u_agent
+    }
+
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    res = requests.get(url, headers=headers, allow_redirects=False)
+    if res.status_code != 200:
         return 0
-    return response.json().get('data', {}).get('subscribers', 0)
+    dic = res.json()
+    if 'data' not in dic or 'subscribers' not in dic.get('data'):
+        return 0
+    return dic['data']['subscribers']

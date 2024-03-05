@@ -4,6 +4,7 @@ This module contains a function that queries the Reddit API
 """
 import requests
 
+
 def number_of_subscribers(subreddit):
     """ Returns the number of subscribers for a given subreddit. """
     u_agent = 'Mozilla/5.0'

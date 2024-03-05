@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """hot articles again"""
-import requests
 from collections import Counter
+import requests
 
 
 def count_words(subreddit, word_list, after="", words_counts=Counter()):

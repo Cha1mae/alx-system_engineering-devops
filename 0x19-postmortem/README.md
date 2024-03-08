@@ -1,10 +1,9 @@
-My First Postmortem
-Issue Summary:
-Duration: The outage occurred on March 4, 2024, from 3:00 PM to 4:30 PM (UTC-5).
-Impact: The outage affected the authentication service, rendering it inaccessible for 50% of users. Users experienced login failures and inability to access secure areas of the application.
-Root Cause:
+# Issue Summary:
+* Duration: The outage occurred on March 4, 2024, from 3:00 PM to 4:30 PM (UTC-5).
+* Impact: The outage affected the authentication service, rendering it inaccessible for 50% of users. Users experienced login failures and inability to access secure areas of the application.
+* Root Cause:
 The root cause of the outage was traced back to a misconfigured firewall rule during a routine infrastructure update.
-Timeline:
+* Timeline:
 3:00 PM: Issue detected as a surge in failed login attempts reported by monitoring tools.
 3:05 PM: Engineering team alerted and began investigation.
 3:10 PM: Initially suspected a database issue due to recent data migration activities.
@@ -13,15 +12,15 @@ Timeline:
 3:45 PM: Issue escalated to network administrators for immediate action.
 4:00 PM: Firewall rule corrected, but service remained unstable due to high traffic backlog.
 4:30 PM: Service fully restored after implementing rate limiting measures to manage incoming traffic.
-Root Cause and Resolution:
+* Root Cause and Resolution:
 The issue stemmed from a misconfigured firewall rule that blocked legitimate traffic to the authentication service. To resolve the problem, the firewall rule was corrected, and rate limiting measures were implemented to mitigate the impact of incoming traffic surges.
-Corrective and Preventative Measures:
+* Corrective and Preventative Measures:
 Improve change management procedures to prevent misconfigurations during infrastructure updates.
 Enhance monitoring for real-time detection of abnormal traffic patterns.
 Conduct thorough post-deployment testing to ensure system integrity after infrastructure changes.
 Implement automated rollback procedures for quick resolution of configuration errors.
 
-Advanced:
+# Advanced:
 Hey folks! 🐾 Ever wondered what happens when our authentication service decides to play hide and seek? Well, buckle up, because I've got a tail-wagging tale to tell – it's the postmortem you never knew you needed!
 Issue Summary:
 🔒 Picture this: on March 4, 2024, from 3:00 PM to 4:30 PM (UTC-5), our authentication service decided to take an impromptu nap, leaving 50% of our users locked out of their accounts! 😱 It was chaos, with failed logins aplenty and users knocking on our virtual doors for access.

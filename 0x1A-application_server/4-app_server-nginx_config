@@ -25,7 +25,7 @@ server {
     location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
         proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
     }
-        # airbnb4
+        # airbnb3
     location /api {
         proxy_pass http://127.0.0.1:5002/api;
     }

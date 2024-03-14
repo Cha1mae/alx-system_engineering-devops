@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # this will help reload GUnicorn
-# shellcheck disable=SC2009  
-
+# shellcheck disable=SC2009
 pkill -HUP gunicorn
